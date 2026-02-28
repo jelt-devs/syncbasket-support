@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SyncBasket – Support &amp; Privacy</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5ea;
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #34C759, #007AFF);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        header h1 { font-size: 22px; font-weight: 700; color: #1d1d1f; }
+        header p  { font-size: 13px; color: #6e6e73; }
+
+        /* ── TABS ── */
+        .tabs {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e5ea;
+            display: flex;
+            padding: 0 24px;
+            gap: 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #6e6e73;
+            cursor: pointer;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .tab-btn:hover { color: #1d1d1f; }
+
+        .tab-btn.active {
+            color: #007AFF;
+            border-bottom-color: #007AFF;
+            font-weight: 600;
+        }
+
+        /* ── PANELS ── */
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        /* ── LAYOUT ── */
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #1d1d1f; }
+
+        .effective { font-size: 13px; color: #8e8e93; margin-bottom: 8px; }
+
+        .subtitle { color: #6e6e73; font-size: 16px; margin-bottom: 40px; }
+
+        /* ── CARDS ── */
+        .section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .section h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 14px;
+            color: #1d1d1f;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section h3 .icon { font-size: 20px; }
+
+        .section p {
+            font-size: 14px;
+            color: #3a3a3c;
+            margin-bottom: 10px;
+        }
+
+        .section p:last-child { margin-bottom: 0; }
+
+        /* ── LISTS ── */
+        .section ul { list-style: none; padding: 0; }
+
+        .section ul li {
+            font-size: 14px;
+            color: #3a3a3c;
+            padding: 7px 0;
+            border-bottom: 1px solid #f0f0f5;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+
+        .section ul li:last-child { border-bottom: none; }
+
+        .section ul li::before {
+            content: "•";
+            color: #007AFF;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* numbered steps */
+        .steps { list-style: none; counter-reset: step-counter; padding: 0; }
+
+        .steps li {
+            counter-increment: step-counter;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #3a3a3c;
+            border-bottom: 1px solid #f0f0f5;
+        }
+
+        .steps li:last-child { border-bottom: none; }
+
+        .steps li::before {
+            content: counter(step-counter);
+            background: #007AFF;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ── FAQ ── */
+        .faq-item {
+            border-bottom: 1px solid #f0f0f5;
+            padding: 14px 0;
+        }
+
+        .faq-item:first-of-type { padding-top: 0; }
+        .faq-item:last-of-type  { border-bottom: none; padding-bottom: 0; }
+
+        .faq-item .question {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-bottom: 6px;
+        }
+
+        .faq-item .answer {
+            font-size: 14px;
+            color: #3a3a3c;
+            line-height: 1.6;
+        }
+
+        /* ── BADGES ── */
+        .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f0f5;
+            border-radius: 8px;
+            padding: 7px 12px;
+            font-size: 13px;
+            color: #3a3a3c;
+        }
+
+        /* ── CONTACT BOX ── */
+        .contact-box {
+            background: linear-gradient(135deg, #007AFF11, #34C75911);
+            border: 1px solid #007AFF33;
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .contact-box p { font-size: 14px; color: #3a3a3c; margin-bottom: 16px; }
+
+        .contact-box a {
+            display: inline-block;
+            background: #007AFF;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 980px;
+        }
+
+        .contact-box a:hover { background: #0062cc; }
+
+        /* ── HIGHLIGHT BOX ── */
+        .highlight-box {
+            background: #f0f7ff;
+            border-left: 3px solid #007AFF;
+            border-radius: 0 8px 8px 0;
+            padding: 14px 16px;
+            font-size: 14px;
+            color: #3a3a3c;
+            margin-top: 14px;
+        }
+
+        /* ── TABLES ── */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
+
+        th {
+            text-align: left;
+            font-weight: 600;
+            color: #6e6e73;
+            padding: 8px 10px;
+            border-bottom: 2px solid #e5e5ea;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f5;
+            vertical-align: top;
+            color: #3a3a3c;
+        }
+
+        tr:last-child td { border-bottom: none; }
+        td:first-child { font-weight: 500; color: #1d1d1f; }
+
+        .pill {
+            display: inline-block;
+            background: #34C75922;
+            color: #1a7d3c;
+            border-radius: 980px;
+            padding: 2px 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #8e8e93;
+            padding: 32px 24px;
+        }
+
+        footer a { color: #007AFF; text-decoration: none; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 500px) {
+            .tab-btn { padding: 12px 14px; font-size: 14px; }
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { display: none; }
+            td { border: none; padding: 6px 0; }
+            td:first-child { font-size: 13px; color: #6e6e73; font-weight: 600; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">🛒</div>
+    <div>
+        <h1>SyncBasket</h1>
+        <p>Shared grocery lists for households</p>
+    </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+    <button class="tab-btn active" onclick="showTab('support', this)">Support</button>
+    <button class="tab-btn"        onclick="showTab('privacy',  this)">Privacy Policy</button>
+</div>
+
+<!-- ══════════════ SUPPORT PANEL ══════════════ -->
+<div id="support" class="panel active">
+<div class="container">
+
+    <h2>Support</h2>
+    <p class="subtitle">Find answers to common questions or reach out to us directly.</p>
+
+    <div class="section">
+        <h3><span class="icon">🚀</span> Getting Started</h3>
+        <ol class="steps">
+            <li>Open SyncBasket and enter a display name to create your account.</li>
+            <li>Tap <strong>Create Homestead</strong> to start a shared household, or tap <strong>Join Homestead</strong> and enter the homestead name.</li>
+            <li>Once inside your homestead, tap <strong>+</strong> to add items to the shared grocery list.</li>
+            <li>Invite household members — they tap Join and enter your homestead name. You'll receive a notification to accept their request.</li>
+            <li>All members see the list update in real time.</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">❓</span> Frequently Asked Questions</h3>
+
+        <div class="faq-item">
+            <p class="question">How do I invite someone to my homestead?</p>
+            <p class="answer">Share your homestead name with the person you want to invite. They open SyncBasket, tap <strong>Join Homestead</strong>, and enter the exact name. You'll get a notification to approve or decline their request.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">Why am I not receiving notifications?</p>
+            <p class="answer">Go to iPhone Settings → SyncBasket → Notifications and make sure notifications are enabled. Also check inside the app under Settings → Notifications to confirm list updates and join request alerts are turned on.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">Why aren't changes syncing to other devices?</p>
+            <p class="answer">Changes sync over the internet in real time. Check that both devices have an active internet connection. If items still don't appear, try closing and reopening the app — it will re-establish the connection automatically.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">How does barcode scanning work?</p>
+            <p class="answer">Tap <strong>+</strong> then the barcode icon in the Add Item screen. Point the camera at a product barcode — the app will look up the product name and pre-fill the item name for you.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">What are Repeatable Items?</p>
+            <p class="answer">Repeatable Items are things you buy regularly (e.g., milk every 7 days). Open Repeatable Items, add an item and set an interval — SyncBasket will automatically add it back to your grocery list when the interval expires.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">How do I transfer homestead ownership?</p>
+            <p class="answer">Go to Settings → Members, tap the member you want to promote, and select <strong>Transfer Ownership</strong>. They'll receive a notification and must accept within 48 hours.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">What happens if I leave a homestead?</p>
+            <p class="answer">Your membership is removed. If you are the owner and leave without transferring ownership first, ownership is automatically passed to another member.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">Can I use the app offline?</p>
+            <p class="answer">Yes. SyncBasket uses Firestore offline persistence — you can view and add items without internet. Changes sync automatically when connectivity is restored.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">How do Archived Lists work?</p>
+            <p class="answer">When you clear completed items, the list is archived locally on your device. Tap the archive icon in the top-right of the grocery list to view past shopping trips. Archives are stored on-device only and are not synced.</p>
+        </div>
+
+        <div class="faq-item">
+            <p class="question">Can I delete my account?</p>
+            <p class="answer">Yes. Email us at the address below and we'll remove your user record, homestead membership, and all data linked to your device from our servers within 30 days.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">✨</span> Features at a Glance</h3>
+        <div class="badge-row">
+            <div class="badge">🔄 Real-time sync</div>
+            <div class="badge">📸 Barcode scanning</div>
+            <div class="badge">🔔 Push notifications</div>
+            <div class="badge">🔁 Repeatable items</div>
+            <div class="badge">📦 Archived lists</div>
+            <div class="badge">💰 Price tracking</div>
+            <div class="badge">📵 Offline support</div>
+            <div class="badge">🏠 Multi-member households</div>
+        </div>
+    </div>
+
+    <div class="contact-box">
+        <p>Didn't find your answer? We're happy to help.</p>
+        <a href="mailto:support@syncbasket.app">Contact Support</a>
+    </div>
+
+</div>
+</div><!-- /support -->
+
+<!-- ══════════════ PRIVACY PANEL ══════════════ -->
+<div id="privacy" class="panel">
+<div class="container">
+
+    <p class="effective">Effective date: February 27, 2026</p>
+    <h2>Privacy Policy</h2>
+    <p class="subtitle">We built SyncBasket to be simple and private. This policy explains exactly what data we collect, why, and how it is protected.</p>
+
+    <div class="section">
+        <h3><span class="icon">📋</span> Summary</h3>
+        <div class="highlight-box">
+            SyncBasket does <strong>not</strong> sell your data, display ads, or track you across other apps or websites. The data we store is limited to what is strictly necessary to provide the shared grocery list service.
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">👤</span> Who We Are</h3>
+        <p>SyncBasket is an independent iOS application. For privacy inquiries, contact us at <a href="mailto:support@syncbasket.app" style="color:#007AFF;">support@syncbasket.app</a>.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">📦</span> Data We Collect</h3>
+        <p>We collect only what is needed to provide the service:</p>
+        <table>
+            <thead>
+                <tr><th>Data</th><th>Purpose</th><th>Where stored</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Display name</td><td>Identify you to household members</td><td>Firestore (cloud)</td></tr>
+                <tr><td>Anonymous device ID</td><td>Uniquely identify your account without requiring email or phone</td><td>Firestore (cloud)</td></tr>
+                <tr><td>Firebase Auth UID</td><td>Enforce security rules so only your household sees your data</td><td>Firestore (cloud)</td></tr>
+                <tr><td>FCM push token</td><td>Deliver push notifications</td><td>Firestore (cloud)</td></tr>
+                <tr><td>Grocery list items</td><td>Share your list with household members in real time</td><td>Firestore (cloud)</td></tr>
+                <tr><td>Homestead info &amp; members</td><td>Manage your household group</td><td>Firestore (cloud)</td></tr>
+                <tr><td>Notification preferences</td><td>Respect your alert settings</td><td>Firestore + device</td></tr>
+                <tr><td>Archived lists</td><td>Local history of past shopping trips</td><td><span class="pill">On-device only</span></td></tr>
+                <tr><td>Repeatable items</td><td>Auto-add recurring items to the shared list</td><td><span class="pill">On-device only</span></td></tr>
+            </tbody>
+        </table>
+        <div class="highlight-box" style="margin-top:16px;">
+            We do <strong>not</strong> collect your email address, phone number, location, health data, financial information, or any biometric data.
+        </div>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">⚙️</span> How We Use Your Data</h3>
+        <ul>
+            <li>To provide real-time grocery list synchronisation across your household members.</li>
+            <li>To send push notifications when someone updates the list or requests to join your homestead.</li>
+            <li>To manage homestead membership (join requests, ownership transfers).</li>
+            <li>To authenticate requests and enforce security rules so only your household can access your data.</li>
+        </ul>
+        <p style="margin-top:14px;">We do not use your data for advertising, profiling, analytics, or any purpose other than operating the app.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">🔐</span> Device Permissions</h3>
+        <table>
+            <thead>
+                <tr><th>Permission</th><th>Why it is needed</th><th>When requested</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Camera</td><td>Scanning product barcodes to pre-fill item names</td><td>Only when you tap the barcode scanner</td></tr>
+                <tr><td>Notifications</td><td>Alerting you to list updates and join requests</td><td>On first launch</td></tr>
+                <tr><td>Background refresh</td><td>Receiving push notifications while the app is backgrounded</td><td>Automatic (no prompt)</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top:14px;">Camera images are processed entirely on-device; no photos or video are uploaded to our servers.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">🔗</span> Third-Party Services</h3>
+        <p>SyncBasket uses the following Google Firebase services to operate:</p>
+        <table>
+            <thead>
+                <tr><th>Service</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Firebase Authentication</td><td>Anonymous sign-in to secure Firestore access rules</td></tr>
+                <tr><td>Cloud Firestore</td><td>Store and sync grocery list, homestead, and user data</td></tr>
+                <tr><td>Firebase Cloud Messaging</td><td>Deliver push notifications to devices</td></tr>
+            </tbody>
+        </table>
+        <p style="margin-top:14px;">Firebase is operated by Google LLC. Data is processed according to <a href="https://firebase.google.com/support/privacy" style="color:#007AFF;">Google's Firebase Privacy Policy</a>. No other third-party SDKs, analytics libraries, or advertising frameworks are included in the app.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">🗓️</span> Data Retention</h3>
+        <ul>
+            <li>Your data is retained in Firestore for as long as your account is active.</li>
+            <li>Join requests and ownership transfer requests expire automatically after <strong>48 hours</strong>.</li>
+            <li>Archived lists are stored only on your device and are not backed up to our servers.</li>
+            <li>When you leave a homestead, your membership record is deleted from Firestore immediately.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">🔒</span> Data Security</h3>
+        <p>All data in transit is encrypted using TLS. Data at rest is stored in Google Cloud Firestore with security rules that enforce:</p>
+        <ul>
+            <li>Only authenticated users can read or write data.</li>
+            <li>A user can only access their own user document or documents belonging to their homestead.</li>
+            <li>Homestead data can only be modified by current members of that homestead.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">👶</span> Children's Privacy</h3>
+        <p>SyncBasket is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with data, please contact us at <a href="mailto:support@syncbasket.app" style="color:#007AFF;">support@syncbasket.app</a> and we will delete it promptly.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">⚖️</span> Your Rights</h3>
+        <p>You have the right to:</p>
+        <ul>
+            <li><strong>Access</strong> the personal data we hold about you.</li>
+            <li><strong>Correct</strong> inaccurate data (e.g., update your display name in app settings).</li>
+            <li><strong>Delete</strong> your account and all associated data.</li>
+            <li><strong>Withdraw consent</strong> for notifications at any time via iPhone Settings → SyncBasket → Notifications.</li>
+        </ul>
+        <p style="margin-top:12px;">To request account deletion or a copy of your data, email <a href="mailto:support@syncbasket.app" style="color:#007AFF;">support@syncbasket.app</a>. We will process requests within 30 days.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">🚫</span> No Tracking or Advertising</h3>
+        <p>SyncBasket does not track users across apps or websites owned by other companies. We do not use advertising identifiers (IDFA), third-party analytics SDKs, or any cross-site tracking technology. The <code>NSPrivacyTracking</code> flag in our privacy manifest is set to <strong>false</strong>.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">📝</span> Changes to This Policy</h3>
+        <p>If we make material changes to this policy, we will update the effective date at the top of this page. Continued use of the app after changes constitutes acceptance of the revised policy. For significant changes we will notify you via an in-app message.</p>
+    </div>
+
+    <div class="section">
+        <h3><span class="icon">✉️</span> Contact</h3>
+        <p>For any privacy questions, data requests, or concerns:</p>
+        <p><strong>Email:</strong> <a href="mailto:support@syncbasket.app" style="color:#007AFF;">support@syncbasket.app</a></p>
+    </div>
+
+</div>
+</div><!-- /privacy -->
+
+<footer>
+    &copy; 2026 SyncBasket
+</footer>
+
+<script>
+    function showTab(id, btn) {
+        document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        btn.classList.add('active');
+    }
+
+    // Support deep-linking: index.html#privacy
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'privacy') {
+        const btn = document.querySelectorAll('.tab-btn')[1];
+        showTab('privacy', btn);
+    }
+</script>
+
+</body>
+</html>
